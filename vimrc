@@ -157,14 +157,3 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
-"map <Leader>t :Dispatch cd arenaflowers.com/ && ruby -I "lib:test" ../%<CR>
-map <Leader>t :call RunTests("%")<CR>
-map <Leader>l :Dispatch cd arenaflowers.com/ && ruby -I "lib:test" ../%:<C-r>=line('.')<CR>
-
-
-function! RunTests(filename)
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-  :silent !echo;echo;echo;echo;echo;echo;echo;echo;echo;echo
-
-  exec "Dispatch cd arenaflowers.com/ && ruby -I \"lib:test\" ../" .a:filename
-endfunction
