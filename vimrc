@@ -216,3 +216,30 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'ngmy/vim-rubocop'
+Plugin 'slim-template/vim-slim'
+Plugin 'bronson/vim-trailing-whitespace'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
