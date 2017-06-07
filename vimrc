@@ -2,23 +2,66 @@ execute pathogen#infect()
 
 set nocompatible
 
-set hidden
 
 set title
 set number
 set ruler
-set wrap
 
+" Hide buffer instead of abandoning when unloading
+set hidden ruler wmnu
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
+set wildignore=.svn,CVS,.git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,*.pyc,*.pyo,**/vendor/**/vendor/**,*/project/*,*/target/*,*.hi
+
+
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
+
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+
+set wrap                          " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
+
+set visualbell                    " No beeping.
+set noerrorbells         " don't beep
+
+" Backspace behave as expected
+set backspace=indent,eol,start
+
+set backupdir=~/.vim/tmp/,~/.tmp,~/tmp,/var/tmp,/tmp   " Keep swap files in one location
+set directory=~/.vim/tmp/,~/.tmp,~/tmp,/var/tmp,/tmp   " Keep swap files in one location
+
+set laststatus=2                  " Show the status line all the time
+
+" Make the view port scroll faster
+nnoremap <C-e> 5<C-e>
+nnoremap <C-y> 5<C-y>
+
+" Command and search pattern history
+set history=1000
+set undolevels=1000
+
+" Tabs and indentation.
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set autoindent    " always set autoindenting on
+set copyindent    " copy the previous indentation on autoindenting
+set shiftround    " use multiple of shiftwidth when indenting with '<' and '>'
+set showmatch     " set show matching parenthesis
 
-set scrolloff=3
+" Tabs for ruby
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 
-set incsearch
-set hlsearch
+" Tabs for python
+autocmd FileType python set sw=4
+autocmd FileType python set ts=4
+autocmd FileType python set sts=4
 
-set colorcolumn=80
+" Tabs for javascript
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
 syntax enable
 syntax on
 
@@ -26,7 +69,12 @@ filetype on
 filetype plugin on
 filetype indent on
 
-set background=dark
+set incsearch
+set hlsearch
+
+set colorcolumn=80
+
+set background=light
 colorscheme solarized
 
 noremap <left> <nop>
@@ -40,7 +88,6 @@ let mapleader = "\<Space>"
 
 "ctrlp
 nnoremap <Leader>o :CtrlP<CR>
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/coverage/*,*.log
 
 "CtrlPTag
 nnoremap <leader>f :CtrlPTag<cr>
@@ -133,6 +180,7 @@ autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
 autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
