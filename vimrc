@@ -1,8 +1,14 @@
 " color
 set background=light
-" colorscheme solarized //require pluging
+colorscheme solarized
 
+" syntax
 syntax enable
+syntax on
+
+filetype on
+filetype plugin on
+filetype indent on
 
 " space and tabs
 set tabstop=2
@@ -25,6 +31,7 @@ set incsearch
 set hlsearch
 set ignorecase
 set smartcase
+set path+=**
 
 " movement
 " move vertically by visual line
@@ -44,7 +51,7 @@ nnoremap <C-y> 5<C-y>
 let mapleader = "\<Space>"
 inoremap jk <esc>
 nnoremap <Leader>w :w<CR> " save
-
+nnoremap <Leader>o :find<Space>
 
 "plugin config
 "traillign whitespacea
