@@ -42,6 +42,8 @@ noremap <down> <nop>
 inoremap <esc> <nop>
 nnoremap j gj
 nnoremap k gk
+map <C-j> :cn<CR>
+map <C-k> :cp<CR>
 
 " Make the view port scroll faster
 nnoremap <C-e> 5<C-e>
@@ -59,3 +61,24 @@ set runtimepath^=~/.vim/bundle/trailing-whitespace.vim
 autocmd BufWritePre * :FixWhitespace
 let g:DeleteTrailingWhitespace = 1
 let g:DeleteTrailingWhitespace_Action = 'delete'
+
+"ack
+set runtimepath^=~/.vim/bundle/ack.vim
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+nmap <leader>j mA:Ack<space>
+nmap <leader>ja mA:Ack "<C-r>=expand("<cword>")<cr>"
+nmap <leader>jA mA:Ack "<C-r>=expand("<cWORD>")<cr>
+
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'mileszs/ack.vim'
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'kchmck/vim-coffee-script'
+
+call vundle#end()
+filetype plugin indent on
