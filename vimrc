@@ -5,10 +5,8 @@ colorscheme solarized
 " syntax
 syntax enable
 syntax on
-
-filetype on
-filetype plugin on
-filetype indent on
+set nocompatible
+filetype off
 
 " space and tabs
 set tabstop=2
@@ -25,6 +23,8 @@ set showcmd
 set wildmenu
 set visualbell
 set noerrorbells
+set colorcolumn=80
+set laststatus=2
 
 " searching
 set incsearch
@@ -42,9 +42,13 @@ noremap <down> <nop>
 inoremap <esc> <nop>
 nnoremap j gj
 nnoremap k gk
-map <C-j> :cn<CR>
-map <C-k> :cp<CR>
-
+map <C-n> :cn<CR>
+map <C-p> :cp<CR>
+"
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-h> <C-w>h
+nmap <C-l> <C-w>h
 " Make the view port scroll faster
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
@@ -53,7 +57,10 @@ nnoremap <C-y> 5<C-y>
 let mapleader = "\<Space>"
 inoremap jk <esc>
 nnoremap <Leader>w :w<CR> " save
-nnoremap <Leader>o :find<Space>
+nnoremap <Leader>o :FZF<CR>
+
+"copy and past
+set clipboard=unnamed
 
 "plugin config
 "traillign whitespacea
@@ -64,21 +71,43 @@ let g:DeleteTrailingWhitespace_Action = 'delete'
 
 "ack
 set runtimepath^=~/.vim/bundle/ack.vim
-let g:ackprg = 'ag --nogroup --nocolor --column'
+let g:ackprg = 'ag --nogroup --nocolor --column --mmap'
 
-nmap <leader>j mA:Ack<space>
-nmap <leader>ja mA:Ack "<C-r>=expand("<cword>")<cr>"
-nmap <leader>jA mA:Ack "<C-r>=expand("<cWORD>")<cr>
+nmap <leader>a mA:Ack<space>
+nmap <leader>aa mA:Ack "<C-r>=expand("<cword>")<cr>"
+nmap <leader>aA mA:Ack "<C-r>=expand("<cWORD>")<cr>
+
+" Syntastic config
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" fzf
+set rtp+=/usr/local/opt/fzf
+
+" EasyAlign
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
 
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'mileszs/ack.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/vim-easy-align'
 
 call vundle#end()
 filetype plugin indent on
