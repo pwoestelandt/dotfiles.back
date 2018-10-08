@@ -1,5 +1,5 @@
 " color
-set background=light
+set background=dark
 colorscheme solarized
 
 " syntax
@@ -57,7 +57,6 @@ nnoremap <C-y> 5<C-y>
 let mapleader = "\<Space>"
 inoremap jk <esc>
 nnoremap <Leader>w :w<CR> " save
-nnoremap <Leader>o :FZF<CR>
 
 "copy and past
 set clipboard=unnamed
@@ -86,9 +85,6 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-" fzf
-set rtp+=/usr/local/opt/fzf
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
