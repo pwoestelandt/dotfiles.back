@@ -1,3 +1,5 @@
+set nocompatible
+
 " color
 set background=dark
 colorscheme solarized
@@ -5,7 +7,6 @@ colorscheme solarized
 " syntax
 syntax enable
 syntax on
-set nocompatible
 filetype off
 
 " space and tabs
@@ -16,14 +17,21 @@ set autoindent
 set copyindent
 set shiftround
 set showmatch
+set backspace=indent,eol,start
 
 " ui
 set number
-set showcmd
+set title
 set wildmenu
 set visualbell
 set noerrorbells
 set colorcolumn=80
+set cursorline
+set ruler
+set showcmd
+set showmode
+
+" status line
 set laststatus=2
 
 " searching
@@ -32,6 +40,18 @@ set hlsearch
 set ignorecase
 set smartcase
 set path+=**
+
+" swap and backup
+set directory=$HOME/.vim/swp//
+set backupdir=~/.vim/backup//
+
+" undo / redo
+set undofile
+set undodir=~/.vim/undodir
+
+" miscellaneous
+set autoread
+set hidden
 
 " movement
 " move vertically by visual line
@@ -44,14 +64,20 @@ nnoremap j gj
 nnoremap k gk
 map <C-n> :cn<CR>
 map <C-p> :cp<CR>
-"
+
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>h
+
 " Make the view port scroll faster
 nnoremap <C-e> 5<C-e>
 nnoremap <C-y> 5<C-y>
+
+" netrw
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 30
 
 " leader
 let mapleader = "\<Space>"
@@ -68,19 +94,7 @@ autocmd BufWritePre * :FixWhitespace
 let g:DeleteTrailingWhitespace = 1
 let g:DeleteTrailingWhitespace_Action = 'delete'
 
-"ack
-set runtimepath^=~/.vim/bundle/ack.vim
-let g:ackprg = 'ag --nogroup --nocolor --column --mmap'
-
-nmap <leader>a mA:Ack<space>
-nmap <leader>aa mA:Ack "<C-r>=expand("<cword>")<cr>"
-nmap <leader>aA mA:Ack "<C-r>=expand("<cWORD>")<cr>
-
 " Syntastic config
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -97,7 +111,6 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 
-Plugin 'mileszs/ack.vim'
 Plugin 'bronson/vim-trailing-whitespace'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'airblade/vim-gitgutter'
