@@ -1,3 +1,4 @@
+set shell=bash
 set nocompatible
 
 " color
@@ -22,11 +23,11 @@ set backspace=indent,eol,start
 " ui
 set number
 set title
+set wildmode=longest,list,full
 set wildmenu
 set visualbell
 set noerrorbells
 set colorcolumn=80
-set cursorline
 set ruler
 set showcmd
 set showmode
@@ -40,6 +41,9 @@ set hlsearch
 set ignorecase
 set smartcase
 set path+=**
+
+" autocomplete
+set complete-=i " disable files
 
 " swap and backup
 set directory=$HOME/.vim/swp//
@@ -69,6 +73,10 @@ nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-h> <C-w>h
 nmap <C-l> <C-w>h
+
+"Jump back to last edited buffer
+nnoremap <C-b> <C-^>
+inoremap <C-b> <esc><C-^>
 
 " Make the view port scroll faster
 nnoremap <C-e> 5<C-e>
@@ -108,15 +116,14 @@ nmap ga <Plug>(EasyAlign)
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/vim-easy-align'
-
+Plugin 'ngmy/vim-rubocop'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
 call vundle#end()
 filetype plugin indent on
