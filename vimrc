@@ -1,3 +1,28 @@
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'bronson/vim-trailing-whitespace'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'martinda/Jenkinsfile-vim-syntax'
+Plugin 'thoughtbot/vim-rspec'
+Plugin 'jgdavey/tslime.vim'
+Plugin 'neomake/neomake'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
+call vundle#end()
+
+call neomake#configure#automake('nrwi', 500)
+
+
+
 set shell=bash
 set nocompatible
 
@@ -34,6 +59,8 @@ set showmode
 
 " status line
 set laststatus=2
+" Add git branch to statusline
+set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P
 
 " searching
 set incsearch
@@ -41,6 +68,9 @@ set hlsearch
 set ignorecase
 set smartcase
 set path+=**
+
+" spellcheck
+set spell
 
 " autocomplete
 set complete-=i " disable files
@@ -96,7 +126,7 @@ nnoremap <Leader>w :w<CR> " save
 set clipboard=unnamed
 
 "plugin config
-"traillign whitespacea
+"trailing whitespaces
 set runtimepath^=~/.vim/bundle/trailing-whitespace.vim
 autocmd BufWritePre * :FixWhitespace
 let g:DeleteTrailingWhitespace = 1
@@ -112,18 +142,19 @@ let g:syntastic_check_on_wq = 0
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
-" Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" specs
+let g:rspec_command = 'call Send_to_Tmux("bundle exec rspec {spec}\n")'
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
 
-Plugin 'VundleVim/Vundle.vim'
+" used patched fonts for airline arrows/triangles
+let g:airline_powerline_fonts=1
 
-Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'martinda/Jenkinsfile-vim-syntax'
-call vundle#end()
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#show_buffers = 0
+let g:airline#extensions#tabline#show_close_button = 0
+
+let g:airline_theme='molokai'
 filetype plugin indent on
