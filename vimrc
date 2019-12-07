@@ -5,7 +5,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'bronson/vim-trailing-whitespace'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/vim-easy-align'
@@ -16,23 +16,43 @@ Plugin 'neomake/neomake'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'edkolev/tmuxline.vim'
 
 call vundle#end()
 
 call neomake#configure#automake('nrwi', 500)
+let g:neomake_open_list = 2
 
+function! SetBackgroundMode(...)
+ let foo = systemlist("ls")
 
+  let new_background = "light"
+  let system_background = systemlist("defaults read -g AppleInterfaceStyle")
+  redraw!
+
+  if len(system_background) > 0 && system_background[0] ==? "Dark"
+    let new_background = "dark"
+  endif
+
+  if &background != new_background
+    let &background = new_background
+  endif
+endfunction
+
+call SetBackgroundMode()
+call timer_start(60000, "SetBackgroundMode", {"repeat": -1})
 
 set shell=bash
 set nocompatible
 
 " color
-set background=dark
+
 colorscheme solarized
 
 " syntax
 syntax enable
 syntax on
+set redrawtime=10000 " prevent syntax coloring to break on large files
 filetype off
 
 " space and tabs
@@ -59,6 +79,7 @@ set showmode
 
 " status line
 set laststatus=2
+
 " Add git branch to statusline
 set statusline=%F\ %m\ %{fugitive#statusline()}\ %y%=%l,%c\ %P
 
@@ -82,6 +103,12 @@ set backupdir=~/.vim/backup//
 " undo / redo
 set undofile
 set undodir=~/.vim/undodir
+
+" folding
+set foldenable
+set foldlevelstart=10
+set foldnestmax=10
+set foldmethod=manual
 
 " miscellaneous
 set autoread
@@ -157,4 +184,5 @@ let g:airline#extensions#tabline#show_buffers = 0
 let g:airline#extensions#tabline#show_close_button = 0
 
 let g:airline_theme='molokai'
+
 filetype plugin indent on
