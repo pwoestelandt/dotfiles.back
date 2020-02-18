@@ -5,7 +5,6 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'bronson/vim-trailing-whitespace'
-"Plugin 'airblade/vim-gitgutter'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'junegunn/vim-easy-align'
@@ -17,10 +16,11 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 
-call neomake#configure#automake('nrwi', 500)
+call neomake#configure#automake('nw', 1000)
 let g:neomake_open_list = 2
 
 function! SetBackgroundMode(...)
@@ -46,7 +46,6 @@ set shell=bash
 set nocompatible
 
 " color
-
 colorscheme solarized
 
 " syntax
