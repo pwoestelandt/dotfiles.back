@@ -11,42 +11,24 @@ Plugin 'junegunn/vim-easy-align'
 Plugin 'martinda/Jenkinsfile-vim-syntax'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'jgdavey/tslime.vim'
-Plugin 'neomake/neomake'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'maxmellon/vim-jsx-pretty'
+" Plugin 'ngmy/vim-rubocop'
 
 call vundle#end()
-
-call neomake#configure#automake('nw', 1000)
-let g:neomake_open_list = 2
-
-function! SetBackgroundMode(...)
- let foo = systemlist("ls")
-
-  let new_background = "light"
-  let system_background = systemlist("defaults read -g AppleInterfaceStyle")
-  redraw!
-
-  if len(system_background) > 0 && system_background[0] ==? "Dark"
-    let new_background = "dark"
-  endif
-
-  if &background != new_background
-    let &background = new_background
-  endif
-endfunction
-
-call SetBackgroundMode()
-call timer_start(60000, "SetBackgroundMode", {"repeat": -1})
 
 set shell=bash
 set nocompatible
 
 " color
 colorscheme solarized
+set background=dark
 
 " syntax
 syntax enable
@@ -163,6 +145,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_ruby_checkers = ['mri', 'rubocop']
 
 " EasyAlign
 xmap ga <Plug>(EasyAlign)
